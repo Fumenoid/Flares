@@ -66,12 +66,12 @@ if __name__ == "__main__":
                 attrs=['bold']
                 )
             cprint(
-                f"{args.projectone} has {len(dict1.keys())} files.",
+                f"{args.projectone} has '{len(dict1.keys())}' files.",
                 'red',
                 attrs=['bold']
                 )
             cprint(
-                f"{args.projecttwo} has {len(dict2.keys())} files.\n",
+                f"{args.projecttwo} has '{len(dict2.keys())}' files.\n",
                 'red',
                 attrs=['bold']
                 )
@@ -87,12 +87,19 @@ if __name__ == "__main__":
                 )
             for ha in dict1.keys():
                 if ha not in dict2.keys():
-                    cprint(f"[+] {dict1[ha]} present in {args.projectone} got modified/removed in {args.projecttwo}", 'red', attrs=['bold'])
+                    if '.git' not in dict1[ha]:
+                        cprint(
+                            f"[+] {dict1[ha]}\nPresent in {args.projectone}\nGot modified/removed in {args.projecttwo}\n",
+                            'red',
+                            attrs=['bold']
+                            )
+                    else:
+                        continue
                 else:
                     if dict2[ha].split('/')[-2] != dict1[ha].split('/')[-2] :
                         cprint(
-                            f"[+] File '{dict1[ha].split('/')[-1]}' present in both files but in different directories.."
-                            f"\n\tIn {args.projectone} at {dict1[ha]}\n\tIn {args.projecttwo} at {dict2[ha]}",
+                            f"[+] File '{dict1[ha].split('/')[-1]}' present in both projects but in different directories.."
+                            f"\n\tIn {args.projectone} at {dict1[ha]}\n\tIn {args.projecttwo} at {dict2[ha]}\n",
                             'red',
                             attrs=['bold']
                             )
@@ -107,16 +114,19 @@ if __name__ == "__main__":
                 )
             for idd in dict2.keys():
                 if idd not in dict1.keys():
-                    cprint(
-                        f"[+] {dict2[idd]} present in {args.projecttwo} got modified/removed in {args.projectone}",
-                        'red',
-                        attrs=['bold']
-                        )
+                    if '.git' not in dict2[idd]:
+                        cprint(
+                            f"[+] {dict2[idd]}\nPresent in {args.projecttwo}\nGot modified/removed in {args.projectone}\n",
+                            'red',
+                            attrs=['bold']
+                            )
+                    else:
+                        continue
                 else:
                     if dict2[idd].split('/')[-2] != dict1[idd].split('/')[-2] :
                         cprint(
-                            f"[+] File '{dict1[idd].split('/')[-1]}' present in both files but in different directories.."
-                            f"\n\tIn {args.projectone} at {dict1[idd]}\n\tIn {args.projecttwo} at {dict2[idd]}",
+                            f"[+] File '{dict1[idd].split('/')[-1]}' present in both projects but in different directories.."
+                            f"\n\tIn {args.projectone} at {dict1[idd]}\n\tIn {args.projecttwo} at {dict2[idd]}\n",
                             'red',
                             attrs=['bold']
                             )
