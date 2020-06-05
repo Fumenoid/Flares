@@ -39,8 +39,8 @@ $ ./rot-n.py -n 13 -s "Jbnj, n fvzcyr ebg13 ntnva"
 Rot-13, string->
 Woaw, a simple rot13 again
 
-$ ./rot-n.py -b Y -ff ctf{ -s "sjv{1_qc_q_Vbqw}"
-Searching flagformat ctf{
+$ ./rot-n.py -b Y -ff ctf{.*} -s "sjv{1_qc_q_Vbqw}"
+Searching flagformat ctf{.*}
 Key-10, string->
 ctf{1_am_a_Flag}
 
